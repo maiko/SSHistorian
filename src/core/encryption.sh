@@ -461,7 +461,7 @@ generate_encryption_keys() {
     chmod 700 "$keys_dir"
     if [[ $? -ne 0 ]]; then
         log_warning "Failed to set secure permissions on keys directory: $keys_dir"
-    }
+    fi
     
     # Check if keys already exist
     if [[ -f "$private_key" || -f "$public_key" ]]; then
