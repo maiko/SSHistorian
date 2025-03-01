@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+#
+# SSHistorian - Main Executable
+# A secure, database-driven tool for recording, encrypting, and playing back SSH sessions
+# 
+# Copyright (c) 2025 Maiko BOSSUYT <hello@maiko-bossuyt.eu>
+# Co-authored by Claude (Anthropic)
+#
+# Licensed under the GNU General Public License v3.0
+# See LICENSE file for details
+#
+# Version: 2025.03.RC1
+# GitHub: https://github.com/maiko/sshistorian
+
+# Initialize paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# Source constants and core modules
+source "${ROOT_DIR}/src/utils/constants.sh"
+source "${ROOT_DIR}/src/utils/common.sh"
+source "${ROOT_DIR}/src/db/database.sh"
+
+# Ensure keys directory exists
+mkdir -p "${KEYS_DIR}" 2>/dev/null
+
+# Run migration for users upgrading from previous versions
+migrate_config_to_database
+source "${ROOT_DIR}/src/db/models/sessions.sh"
+source "${ROOT_DIR}/src/core/encryption.sh"
+source "${ROOT_DIR}/src/core/ssh.sh"
+source "${ROOT_DIR}/src/ui/cli.sh"
+
+# Source plugin system (if available)
+PLUGIN_MANAGER="${ROOT_DIR}/src/plugins/plugin_manager.sh"
+if [[ -f "$PLUGIN_MANAGER" ]]; then
+    source "$PLUGIN_MANAGER"
+    
+    # Load all available plugins
+    load_plugins
+else
+    log_debug "Plugin system not available (${PLUGIN_MANAGER} not found)"
+fi
+
+# Process command line arguments
+process_arguments "$@"
+
+# Exit with the status from process_arguments
+exit $?

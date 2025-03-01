@@ -1,0 +1,60 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Runtime Data
+data/logs/*
+data/*.db
+
+# Test Results
+tests/results/*
+tmp_dev/
+
+# Personal Configuration
+.env
+config/*.local.sh
+TODO.md
+CONFIG_DESIGN.md
+REFACTORING_2.md
+
+# Temporary Files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Compiled binaries
+*.o
+*.so
+*.dylib
+
+# Dependency directories
+node_modules/
+vendor/
+.venv/
+
+# Cache directories
+.cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Backup files
+*.bak
+*~.nib
+*.save
+
+# Log files
+*.log
+log/
+logs/
+
+# Internal files
+CLAUDE.md
+
+# Keep empty directories
+!data/logs/.gitkeep
+!tests/results/.gitkeep

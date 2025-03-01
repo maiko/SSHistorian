@@ -1,0 +1,19 @@
+{
+    "name": "SSHistorian Dev on Debian Bookworm",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    "runArgs": ["--rm"],
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/app,type=bind"
+    ],
+    "postCreateCommand": "bash -c 'chmod +x ./bin/sshistorian ./tests/run_tests.sh'",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "timonwong.shellcheck",
+                "mads-hartmann.bash-ide-vscode"
+            ]
+        }
+    }
+}

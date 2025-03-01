@@ -1,0 +1,47 @@
+[
+  {
+    "pattern": "^db[0-9]+-([a-z]+)",
+    "tag": "database_$1",
+    "description": "Tags database servers with their environment (e.g., db01-prod → database_prod)"
+  },
+  {
+    "pattern": "^(app|web|cache|worker)[0-9]+-([a-z]+)",
+    "tag": "server_$1_$2",
+    "description": "Tags server type with environment (e.g., app01-prod → server_app_prod)"
+  },
+  {
+    "pattern": "^10\\.0\\.(1[0-9][0-9])\\.[0-9]+$",
+    "tag": "network_dmz",
+    "description": "Tags hosts in DMZ network (10.0.100-199.x)"
+  },
+  {
+    "pattern": "^10\\.0\\.(2[0-9][0-9])\\.[0-9]+$",
+    "tag": "network_backend",
+    "description": "Tags hosts in backend network (10.0.200-299.x)"
+  },
+  {
+    "pattern": "-p\\s+([0-9]+)",
+    "tag": "port_$1",
+    "description": "Tags sessions by non-standard port (e.g., -p 2222 → port_2222)"
+  },
+  {
+    "pattern": "-i\\s+([\\w.-]+\\.pem)",
+    "tag": "key_$1",
+    "description": "Tags sessions by the specific key file used"
+  },
+  {
+    "pattern": "oracle|postgres|mysql|mariadb|mongodb",
+    "tag": "db_access",
+    "description": "Tags database access sessions based on hostname containing database software name"
+  },
+  {
+    "pattern": "jenkins|gitlab|github",
+    "tag": "cicd",
+    "description": "Tags CI/CD related sessions"
+  },
+  {
+    "pattern": "us-(east|west|central)-(1|2)",
+    "tag": "region_$1_$2",
+    "description": "Tags sessions by AWS region pattern in hostname"
+  }
+]
